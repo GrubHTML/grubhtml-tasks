@@ -29,8 +29,8 @@ It provides a seamless experience for managing your daily tasks, featuring a pow
 
 ### ⚡ Smart State Management
 
-- **React Query** for caching, invalidation & background refetching
-- Custom hooks: `useTasks`, `useCreateTask`, `useUpdateTask`, `useDeleteTask`, `useTrashTasks`, `useRestoreTask`
+- **React Query:** Used extensively for data fetching, caching, and background synchronization.
+- Custom hooks: `useTasks`, `useCreateTask`, `useUpdateTask`, `useDeleteTask`, `useTrashTasks`, `useRestoreTask, etc` for clean, organized state logic.
 
 ---
 
@@ -100,7 +100,9 @@ It provides a seamless experience for managing your daily tasks, featuring a pow
 ├── server.js
 └── package.json
 
-### 🏗️ Future Updates
+## ⚙️ Installation
+
+## 🏗️ Future Updates
 
 - Permanent delete UI
 - Task categories
