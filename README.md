@@ -57,6 +57,7 @@ It provides a seamless experience for managing your daily tasks, featuring a pow
 
 ### Frontend Structure
 
+```bash
 /client
 ├── /src
 │ ├── /components
@@ -80,9 +81,11 @@ It provides a seamless experience for managing your daily tasks, featuring a pow
 │ ├── index.jsx
 │ └── styles.css
 └── package.json
+```
 
 ### Backend Structure
 
+```bash
 /server
 ├── /controllers
 │ ├── taskController.js
@@ -99,15 +102,57 @@ It provides a seamless experience for managing your daily tasks, featuring a pow
 │
 ├── server.js
 └── package.json
+```
 
 ## ⚙️ Installation
 
+Follow these steps to set up the project locally.
+
+1. Prerequisites
+
+- Node.js (v18+)
+- MySQL Database instance (local or remote)
+
+2. Backend Setup
+
+```bash
+# Navigate to the server directory
+cd server
+
+# Install dependencies
+npm install
+
+# Create a .env file and add your database configuration
+# Example .env:
+# DB_DIALECT=mysql
+# DB_HOST=localhost
+# DB_USER=root
+# DB_PASSWORD=yourpassword
+# DB_NAME=grubtasks_db
+
+# Run the server
+npm start
+```
+
+3. Frontend Setup
+
+```bash
+# Navigate to the client directory
+cd ../client
+
+# Install dependencies
+npm install
+
+# Start the React application
+npm run dev
+```
+
 ## 🏗️ Future Updates
 
-- Permanent delete UI
-- Task categories
+- Permanent delete functionality
+- Task categories and filtering
 - Completed tasks section
-- Dark mode
+- Dark mode toggle
 - User authentication
 - Drag-and-drop task sorting
 - Search & filters
