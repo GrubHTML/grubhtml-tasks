@@ -89,6 +89,42 @@ const deleteTask = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
+const getImportantTasks = async (req, res) => {
+  try {
+    const tasks = await TaskModel.findAll({
+      where: { isImportant: true },
+    });
+    return res.status(200).json({ tasks });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+const importantTask = async (req, res) => {
+  try {
+    const task = await TaskModel.findByPk(req.params.id);
+    if (!task) return res.status(404).json({ error: "Task not found" });
+    await task.update({ isImportant: true });
+    return res.status(200).json({ message: "Task marked as important" });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+const restoreImportantTask = async (req, res) => {
+  try {
+    const task = await TaskModel.findByPk(req.params.id);
+    if (!task) return res.status(404).json({ error: "Task not found" });
+    await task.update({ isDeleted: false });
+    return res
+      .status(200)
+      .json({ message: "Important Task restored successfully" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: error.message });
+  }
+};
 module.exports = {
   createTask,
   getAllTasks,
@@ -98,4 +134,7 @@ module.exports = {
   getTrashedTasks,
   restoreTask,
   deleteTask,
+  getImportantTasks,
+  importantTask,
+  restoreImportantTask,
 };

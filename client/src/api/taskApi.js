@@ -31,4 +31,17 @@ export const restoreTask = (id) => axiosInstance.put(`/restore/${id}`);
 export const permanentDeleteTask = (id) =>
   axiosInstance.delete(`/deletetask/${id}`);
 
+// important task
+export const getImportantTasks = async () => {
+  const res = await axiosInstance.get("/importanttask");
+  return res.data.tasks; // return ONLY the list
+};
+
+// mark task as important
+export const importantTask = (id) => axiosInstance.put(`/importanttask/${id}`);
+
+// restore important task
+export const restoreImportantTask = (id) =>
+  axiosInstance.put(`/restoreimportanttask/${id}`);
+
 export const getTaskById = (id) => axiosInstance.get(`/getonetask/${id}`);

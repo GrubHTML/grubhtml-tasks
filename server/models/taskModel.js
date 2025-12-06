@@ -21,6 +21,11 @@ const TaskModel = sequelize.define("Task", {
     type: DataTypes.BOOLEAN,
     defaultValue: false,
   },
+  isImportant: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
+
   dueDate: {
     type: DataTypes.DATE,
   },

@@ -8,6 +8,9 @@ const {
   getTrashedTasks,
   restoreTask,
   deleteTask,
+  getImportantTasks,
+  importantTask,
+  restoreImportantTask,
 } = require("../controllers/taskController");
 taskRouter.post("/addtask", createTask);
 taskRouter.get("/getalltasks", getAllTasks);
@@ -17,4 +20,8 @@ taskRouter.put("/softdelete/:id", softDeleteTask);
 taskRouter.put("/restore/:id", restoreTask);
 taskRouter.get("/gettrashedtasks", getTrashedTasks);
 taskRouter.delete("/deletetask/:id", deleteTask);
+taskRouter.get("/importanttask", getImportantTasks);
+taskRouter.put("/importanttask/:id", importantTask);
+taskRouter.put("/restoreimportanttask/:id", restoreImportantTask);
+
 module.exports = { taskRouter };

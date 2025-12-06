@@ -4,7 +4,7 @@ import Homepage from "../pages/Homepage";
 import ProductivityGuides from "../pages/ProductivityGuides";
 import SignUp from "../pages/SignUp";
 import SignIn from "../pages/SignIn";
-import TodoApp from "../pages/TodoApp";
+import TodoApp from "../features/todo-list/TodoApp";
 
 const AppRouter = () => {
   return (

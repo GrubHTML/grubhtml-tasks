@@ -7,6 +7,9 @@ import {
   getTrashedTasks,
   restoreTask,
   permanentDeleteTask,
+  importantTask,
+  getImportantTasks,
+  restoreImportantTask,
 } from "../api/taskApi";
 import toast from "react-hot-toast";
 export function useTasks() {
@@ -66,6 +69,37 @@ export function useDeleteTask() {
       toast.success("Task moved to trash");
       queryClient.invalidateQueries(["tasks"]);
       queryClient.invalidateQueries(["trashTasks"]);
+    },
+  });
+}
+export function useImportantTask() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: importantTask,
+    onSuccess: () => {
+      toast.success("Task marked as important");
+      queryClient.invalidateQueries(["tasks"]);
+      queryClient.invalidateQueries(["importantTasks"]);
+    },
+  });
+}
+export function useGetImportantTasks() {
+  return useQuery({
+    queryKey: ["importantTasks"],
+    queryFn: getImportantTasks,
+  });
+}
+
+export function useImportantRestoreTask() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: restoreImportantTask,
+    onSuccess: () => {
+      toast.success("Task unmarked as important");
+      queryClient.invalidateQueries(["tasks"]); // refresh main list
+      queryClient.invalidateQueries(["importantTasks"]); // refresh trash list
     },
   });
 }
