@@ -4,11 +4,14 @@ const { sequelize } = require("./config/dbConnection");
 const { taskRouter } = require("./routes/taskRouter");
 require("dotenv").config();
 const cors = require("cors");
+const { userRouter } = require("./routes/userRouter.js");
 require("./models/taskModel.js");
+require("./models/userModel.js");
 const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 app.use("/api", taskRouter);
+app.use("/api", userRouter);
 
 // DB connection section
 const dbCreate = async () => {
