@@ -13,7 +13,7 @@ const userSignUp = async (req, res) => {
     });
     return res.status(201).json({ userData });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error });
   }
 };
 
@@ -26,16 +26,16 @@ const userSignIn = async (req, res) => {
     if (!userData) res.status(404).json({ message: "user not found!" });
     const isValid = await bcrypt.compare(password, userData.password);
     if (isValid) {
-      const token = jwt.sign(
+      const accessToken = jwt.sign(
         {
-          data: userData,
+          data: userData.id,
         },
         process.env.JWT_SECRET_KEY,
-        { expiresIn: "1h" }
+        { expiresIn: "15m" }
       );
       return res
         .status(200)
-        .json({ token, message: "User signed in successfully!" });
+        .json({ token: accessToken, message: "User signed in successfully!" });
     }
     if (!isValid)
       return res.status(401).json({ meesage: "invalid credentials" });

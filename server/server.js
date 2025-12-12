@@ -1,17 +1,18 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const { sequelize } = require("./config/dbConnection");
 const { taskRouter } = require("./routes/taskRouter");
-require("dotenv").config();
-const cors = require("cors");
 const { userRouter } = require("./routes/userRouter.js");
+const checkLogin = require("./middlewares/checkLoginMiddleware");
+require("dotenv").config();
 require("./models/taskModel.js");
 require("./models/userModel.js");
 const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
-app.use("/api", taskRouter);
-app.use("/api", userRouter);
+app.use("/api/tasks", checkLogin, taskRouter);
+app.use("/api/users", userRouter);
 
 // DB connection section
 const dbCreate = async () => {
