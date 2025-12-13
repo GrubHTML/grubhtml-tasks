@@ -8,7 +8,7 @@ const checkLogin = require("./middlewares/checkLoginMiddleware");
 require("dotenv").config();
 require("./models/taskModel.js");
 require("./models/userModel.js");
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 app.use("/api/tasks", checkLogin, taskRouter);

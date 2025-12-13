@@ -25,6 +25,8 @@ const userSignIn = async (req, res) => {
     });
     if (!userData) res.status(404).json({ message: "user not found!" });
     const isValid = await bcrypt.compare(password, userData.password);
+    if (!isValid)
+      return res.status(401).json({ meesage: "invalid credentials" });
     if (isValid) {
       const accessToken = jwt.sign(
         {
@@ -37,8 +39,6 @@ const userSignIn = async (req, res) => {
         .status(200)
         .json({ token: accessToken, message: "User signed in successfully!" });
     }
-    if (!isValid)
-      return res.status(401).json({ meesage: "invalid credentials" });
   } catch (error) {
     res.status(500).json({ error: error.mesage });
   }

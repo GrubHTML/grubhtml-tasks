@@ -2,9 +2,11 @@ import GrubTasksLogo from "../components/GrubTasksLogo";
 import { Link } from "react-router";
 import GoogleIcon from "../components/GoogleIcon";
 import { useSignIn } from "../hooks/useAuth";
+import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
 const SignIn = () => {
-  const { mutate: signIn, isPending, isSuccess, isError } = useSignIn();
+  const { mutate: signIn, isPending, isSuccess, isError, data } = useSignIn();
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -12,8 +14,18 @@ const SignIn = () => {
       username: e.target.username.value,
       password: e.target.password.value,
     };
+    localStorage.removeItem("token");
     signIn(data);
   };
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isSuccess && data?.token) {
+      localStorage.setItem("token", data.token);
+      navigate("/tasks");
+    }
+  }, [isSuccess, navigate, data]);
+
   return (
     <>
       <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto ">
@@ -78,7 +90,12 @@ const SignIn = () => {
                 Continue with Google
               </button>
             </div>
-            {isSuccess && <p>Signin success!</p>}
+            {/* {isSuccess && (
+              <>
+                <p>Signin success!</p>
+                {navigate("/tasks")}
+              </>
+            )} */}
 
             {isError && <p>Invalid Username or Password</p>}
           </form>
